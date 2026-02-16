@@ -108,7 +108,7 @@ function Feral:CreateWindow(cfg)
         Size=UDim2.new(0,W,0,H),
         Position=UDim2.new(0.5,-W/2,0.5,-H/2),
         BackgroundColor3=Color3.fromRGB(12,12,22),
-        BackgroundTransparency=0,
+        BackgroundTransparency=0, -- ✏️ ANA MENU TRANSPARAN (0=opak, 1=tamamen şeffaf)
         BorderSizePixel=0, ClipsDescendants=true,
         Parent=GUI,
     },{
@@ -120,11 +120,11 @@ function Feral:CreateWindow(cfg)
     local Hdr = New("Frame",{
         Size=UDim2.new(1,0,0,HDR_H),
         BackgroundColor3=Color3.fromRGB(0,0,0),
-        BackgroundTransparency=0.2,
+        BackgroundTransparency=0.45, -- ✏️ HEADER TRANSPARAN (0=opak, 1=tamamen şeffaf)
         BorderSizePixel=0, ZIndex=3, Parent=Main,
     },{New("UICorner",{CornerRadius=UDim.new(0,8)})})
     New("Frame",{Size=UDim2.new(1,0,0.5,0),Position=UDim2.new(0,0,0.5,0),
-        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.2,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
+        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.45,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
     New("Frame",{Size=UDim2.new(1,0,0,1),Position=UDim2.new(0,0,1,-1),
         BackgroundColor3=C.Border,BorderSizePixel=0,ZIndex=4,Parent=Hdr})
 
@@ -138,7 +138,7 @@ function Feral:CreateWindow(cfg)
         New("UICorner",{CornerRadius=UDim.new(1,0),Parent=iconFrame})
         local iconLbl = New("ImageLabel",{
             Size=UDim2.new(1,0,1,0),
-            BackgroundTransparency=2,
+            BackgroundTransparency=1,
             Image=cfg.Icon,
             ScaleType=Enum.ScaleType.Fit,
             ZIndex=5,Parent=iconFrame,
@@ -172,7 +172,8 @@ function Feral:CreateWindow(cfg)
     -- SIDEBAR
     local SB=New("Frame",{
         Size=UDim2.new(0,SB_W,1,0),
-        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.2,BorderSizePixel=0,Parent=Body,
+        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.45, -- ✏️ SIDEBAR TRANSPARAN (0=opak, 1=tamamen şeffaf)
+        BorderSizePixel=0,Parent=Body,
     },{New("UIStroke",{Color=C.Border,Thickness=1})})
 
     New("TextLabel",{Size=UDim2.new(1,-10,0,28),Position=UDim2.new(0,10,0,4),
@@ -559,4 +560,3 @@ function Feral:CreateWindow(cfg)
 end
 
 return Feral
-
