@@ -138,7 +138,7 @@ function Feral:CreateWindow(cfg)
         New("UICorner",{CornerRadius=UDim.new(1,0),Parent=iconFrame})
         local iconLbl = New("ImageLabel",{
             Size=UDim2.new(1,0,1,0),
-            BackgroundTransparency=1,
+            BackgroundTransparency=2,
             Image=cfg.Icon,
             ScaleType=Enum.ScaleType.Fit,
             ZIndex=5,Parent=iconFrame,
@@ -559,3 +559,4 @@ function Feral:CreateWindow(cfg)
 end
 
 return Feral
+
