@@ -12,7 +12,7 @@ local C = {
     BgRowHov   = Color3.fromRGB(28, 28, 46),
     Sidebar    = Color3.fromRGB(11, 11, 20),
     Header     = Color3.fromRGB(13, 13, 23),
-    Border     = Color3.fromRGB(42, 42, 72),
+    Border     = Color3.fromRGB(40, 40, 40), -- kenar cizgi
     Accent     = Color3.fromRGB(74, 122, 255),
     TxtMain    = Color3.fromRGB(218, 222, 245),
     TxtSub     = Color3.fromRGB(98, 102, 158),
@@ -107,8 +107,8 @@ function Feral:CreateWindow(cfg)
     local Main = New("Frame", {
         Size=UDim2.new(0,W,0,H),
         Position=UDim2.new(0.5,-W/2,0.5,-H/2),
-        BackgroundColor3=Color3.fromRGB(12,12,22),
-        BackgroundTransparency=0, -- ✏️ ANA MENU TRANSPARAN (0=opak, 1=tamamen şeffaf)
+        BackgroundColor3=Color3.fromRGB(23,25,26), -- #17191a - ANA CERCEVE RENGI
+        BackgroundTransparency=0,
         BorderSizePixel=0, ClipsDescendants=true,
         Parent=GUI,
     },{
@@ -119,12 +119,12 @@ function Feral:CreateWindow(cfg)
     -- HEADER
     local Hdr = New("Frame",{
         Size=UDim2.new(1,0,0,HDR_H),
-        BackgroundColor3=Color3.fromRGB(0,0,0),
-        BackgroundTransparency=0.75, -- ✏️ HEADER TRANSPARAN (0=opak, 1=tamamen şeffaf)
+        BackgroundColor3=Color3.fromRGB(31,31,31), -- #1f1f1f - HEADER RENGI
+        BackgroundTransparency=0,
         BorderSizePixel=0, ZIndex=3, Parent=Main,
     },{New("UICorner",{CornerRadius=UDim.new(0,8)})})
     New("Frame",{Size=UDim2.new(1,0,0.5,0),Position=UDim2.new(0,0,0.5,0),
-        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.45,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
+        BackgroundColor3=Color3.fromRGB(31,31,31),BackgroundTransparency=0,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
     New("Frame",{Size=UDim2.new(1,0,0,1),Position=UDim2.new(0,0,1,-1),
         BackgroundColor3=C.Border,BorderSizePixel=0,ZIndex=4,Parent=Hdr})
 
@@ -172,8 +172,8 @@ function Feral:CreateWindow(cfg)
     -- SIDEBAR
     local SB=New("Frame",{
         Size=UDim2.new(0,SB_W,1,0),
-        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.45, -- ✏️ SIDEBAR TRANSPARAN (0=opak, 1=tamamen şeffaf)
-        BorderSizePixel=0,Parent=Body,
+        BackgroundColor3=Color3.fromRGB(31,31,31), -- #1f1f1f - SOL SIDEBAR RENGI
+        BackgroundTransparency=0,BorderSizePixel=0,Parent=Body,
     },{New("UIStroke",{Color=C.Border,Thickness=1})})
 
     New("TextLabel",{Size=UDim2.new(1,-10,0,28),Position=UDim2.new(0,10,0,4),
@@ -189,7 +189,8 @@ function Feral:CreateWindow(cfg)
     -- PANEL
     local Panel=New("Frame",{
         Size=UDim2.new(1,-SB_W,1,0),Position=UDim2.new(0,SB_W,0,0),
-        BackgroundTransparency=1,Parent=Body,
+        BackgroundColor3=Color3.fromRGB(23,25,26), -- #17191a - SAG PANEL RENGI
+        BackgroundTransparency=0,BorderSizePixel=0,Parent=Body,
     })
     local TitleRow=New("Frame",{Size=UDim2.new(1,0,0,30),BackgroundTransparency=1,Parent=Panel})
     local TitleLbl=New("TextLabel",{
@@ -560,4 +561,3 @@ function Feral:CreateWindow(cfg)
 end
 
 return Feral
-
