@@ -95,20 +95,20 @@ function Feral:CreateWindow(cfg)
 
     -- Arka plan blur (Fluent tarzı frosted glass)
     local BlurEffect = Instance.new("BlurEffect")
-    BlurEffect.Size = 8
+    BlurEffect.Size = 0
     BlurEffect.Name = "FeralBlur"
     BlurEffect.Parent = game:GetService("Lighting")
 
     -- Menü kapanınca blur'u da kaldır
     GUI:GetPropertyChangedSignal("Enabled"):Connect(function()
-        BlurEffect.Enabled = GUI.Enabled
+        BlurEffect.Enabled = false -- blur kapali
     end)
 
     local Main = New("Frame", {
         Size=UDim2.new(0,W,0,H),
         Position=UDim2.new(0.5,-W/2,0.5,-H/2),
-        BackgroundColor3=Color3.fromRGB(0,0,0),
-        BackgroundTransparency=0.2,
+        BackgroundColor3=Color3.fromRGB(12,12,22),
+        BackgroundTransparency=0,
         BorderSizePixel=0, ClipsDescendants=true,
         Parent=GUI,
     },{
@@ -120,27 +120,32 @@ function Feral:CreateWindow(cfg)
     local Hdr = New("Frame",{
         Size=UDim2.new(1,0,0,HDR_H),
         BackgroundColor3=Color3.fromRGB(0,0,0),
-        BackgroundTransparency=0.15,
+        BackgroundTransparency=0.2,
         BorderSizePixel=0, ZIndex=3, Parent=Main,
     },{New("UICorner",{CornerRadius=UDim.new(0,8)})})
     New("Frame",{Size=UDim2.new(1,0,0.5,0),Position=UDim2.new(0,0,0.5,0),
-        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.15,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
+        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.2,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
     New("Frame",{Size=UDim2.new(1,0,0,1),Position=UDim2.new(0,0,1,-1),
         BackgroundColor3=C.Border,BorderSizePixel=0,ZIndex=4,Parent=Hdr})
 
-    local iconImage = cfg.Icon or "rbxassetid://6031075938" -- varsayilan ikon
-    New("Frame",{Size=UDim2.new(0,28,0,28),Position=UDim2.new(0,9,0,6),
-        BackgroundColor3=Color3.fromRGB(10,10,20),BorderSizePixel=0,ZIndex=4,Parent=Hdr},{
-        New("UICorner",{CornerRadius=UDim.new(1,0)}),
-        New("ImageLabel",{
+    -- ICON: cfg.Icon ile istedigin asset ID'yi ver, yoksa gizlenir
+    local titleOffset = 10
+    if cfg.Icon then
+        titleOffset = 42
+        local iconFrame = New("Frame",{Size=UDim2.new(0,28,0,28),Position=UDim2.new(0,8,0,6),
+            BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.5,
+            BorderSizePixel=0,ZIndex=4,Parent=Hdr})
+        New("UICorner",{CornerRadius=UDim.new(1,0),Parent=iconFrame})
+        local iconLbl = New("ImageLabel",{
             Size=UDim2.new(1,0,1,0),
             BackgroundTransparency=1,
-            Image=iconImage,
+            Image=cfg.Icon,
             ScaleType=Enum.ScaleType.Fit,
-            ZIndex=5,
-        },{New("UICorner",{CornerRadius=UDim.new(1,0)})}),
-    })
-    New("TextLabel",{Size=UDim2.new(0,80,1,0),Position=UDim2.new(0,40,0,0),
+            ZIndex=5,Parent=iconFrame,
+        })
+        New("UICorner",{CornerRadius=UDim.new(1,0),Parent=iconLbl})
+    end
+    New("TextLabel",{Size=UDim2.new(1,-80,1,0),Position=UDim2.new(0,titleOffset,0,0),
         BackgroundTransparency=1,Text=title,Font=Enum.Font.GothamBold,
         TextSize=15,TextColor3=C.White,TextXAlignment=Enum.TextXAlignment.Left,ZIndex=4,Parent=Hdr})
 
@@ -167,7 +172,7 @@ function Feral:CreateWindow(cfg)
     -- SIDEBAR
     local SB=New("Frame",{
         Size=UDim2.new(0,SB_W,1,0),
-        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.25,BorderSizePixel=0,Parent=Body,
+        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.2,BorderSizePixel=0,Parent=Body,
     },{New("UIStroke",{Color=C.Border,Thickness=1})})
 
     New("TextLabel",{Size=UDim2.new(1,-10,0,28),Position=UDim2.new(0,10,0,4),
