@@ -8,28 +8,28 @@ local LocalPlayer      = Players.LocalPlayer
 local Mouse            = LocalPlayer:GetMouse()
 
 local C = {
-    -- ════ RENK PALETİ - istedigin rengi buradan degistir ════
-    BgMain     = Color3.fromRGB(16, 16, 28),   -- buton/satir arkaplan
-    BgRowHov   = Color3.fromRGB(26, 26, 46),   -- hover efekti
-    Sidebar    = Color3.fromRGB(13, 13, 23),   -- ✏️ SOL SIDEBAR
-    Header     = Color3.fromRGB(13, 13, 23),   -- ✏️ HEADER
-    Border     = Color3.fromRGB(44, 44, 74),   -- kenar cizgi
-    Accent     = Color3.fromRGB(74, 122, 255), -- ✏️ MAVI VURGU
-    TxtMain    = Color3.fromRGB(220, 224, 246),-- ana yazi
-    TxtSub     = Color3.fromRGB(100, 104, 160),-- alt aciklama yazisi
-    TxtMuted   = Color3.fromRGB(70, 70, 120),  -- silik yazi
-    TxtTab     = Color3.fromRGB(255, 255, 255),-- aktif tab yazisi
-    TxtTabOff  = Color3.fromRGB(130, 130, 188),-- pasif tab yazisi
-    ChkBg      = Color3.fromRGB(14, 20, 52),   -- checkbox arkaplan (acik)
-    ChkBorder  = Color3.fromRGB(55, 55, 95),   -- checkbox kenar
-    SliderBg   = Color3.fromRGB(30, 30, 55),   -- slider track arkaplan
-    SliderFill = Color3.fromRGB(74, 122, 255), -- slider dolu kisim
-    InputBg    = Color3.fromRGB(18, 18, 35),   -- ✏️ INPUT ARKAPLAN
-    InputBord  = Color3.fromRGB(48, 48, 82),   -- input kenar
-    BtnBg      = Color3.fromRGB(22, 22, 44),   -- buton arkaplan
-    BtnBord    = Color3.fromRGB(55, 55, 100),  -- buton kenar
-    BtnHov     = Color3.fromRGB(34, 34, 62),   -- buton hover
-    Divider    = Color3.fromRGB(36, 36, 62),   -- ✏️ SATIR ARASI CIZGI
+    -- ✏️ RENK PALETİ
+    BgMain     = Color3.fromRGB(22, 22, 35),   -- satir arkaplan
+    BgRowHov   = Color3.fromRGB(30, 30, 48),   -- hover
+    Sidebar    = Color3.fromRGB(17, 17, 27),   -- sol sidebar
+    Header     = Color3.fromRGB(17, 17, 27),   -- header
+    Border     = Color3.fromRGB(44, 44, 68),   -- kenar cizgi
+    Accent     = Color3.fromRGB(74, 122, 255), -- mavi vurgu
+    TxtMain    = Color3.fromRGB(220, 222, 246),-- ana yazi
+    TxtSub     = Color3.fromRGB(95, 98, 152),  -- alt aciklama
+    TxtMuted   = Color3.fromRGB(68, 68, 115),  -- silik yazi
+    TxtTab     = Color3.fromRGB(255, 255, 255),-- aktif tab
+    TxtTabOff  = Color3.fromRGB(115, 115, 170),-- pasif tab
+    ChkBg      = Color3.fromRGB(13, 13, 22),   -- checkbox acik
+    ChkBorder  = Color3.fromRGB(52, 52, 88),   -- checkbox kenar
+    SliderBg   = Color3.fromRGB(28, 28, 50),   -- slider track
+    SliderFill = Color3.fromRGB(74, 122, 255), -- slider dolu
+    InputBg    = Color3.fromRGB(13, 13, 22),   -- input arkaplan
+    InputBord  = Color3.fromRGB(44, 44, 68),   -- input kenar
+    BtnBg      = Color3.fromRGB(22, 22, 38),   -- buton arkaplan
+    BtnBord    = Color3.fromRGB(52, 52, 88),   -- buton kenar
+    BtnHov     = Color3.fromRGB(32, 32, 52),   -- buton hover
+    Divider    = Color3.fromRGB(44, 44, 68),   -- satir arasi cizgi
     AvatarPink = Color3.fromRGB(230, 155, 188),
     White      = Color3.fromRGB(255, 255, 255),
 }
@@ -94,22 +94,10 @@ function Feral:CreateWindow(cfg)
         Parent=game.CoreGui,
     })
 
-    -- Arka plan blur (Fluent tarzı frosted glass)
-    local BlurEffect = Instance.new("BlurEffect")
-    BlurEffect.Size = 0
-    BlurEffect.Name = "FeralBlur"
-    BlurEffect.Parent = game:GetService("Lighting")
-
-    -- Menü kapanınca blur'u da kaldır
-    GUI:GetPropertyChangedSignal("Enabled"):Connect(function()
-        BlurEffect.Enabled = false -- blur kapali
-    end)
-
     local Main = New("Frame", {
         Size=UDim2.new(0,W,0,H),
         Position=UDim2.new(0.5,-W/2,0.5,-H/2),
-        BackgroundColor3=Color3.fromRGB(16,16,28), -- ana cerceve
-        BackgroundTransparency=0,
+        BackgroundColor3=C.BgMain,
         BorderSizePixel=0, ClipsDescendants=true,
         Parent=GUI,
     },{
@@ -120,33 +108,27 @@ function Feral:CreateWindow(cfg)
     -- HEADER
     local Hdr = New("Frame",{
         Size=UDim2.new(1,0,0,HDR_H),
-        BackgroundColor3=Color3.fromRGB(13,13,23), -- header
-        BackgroundTransparency=0,
+        BackgroundColor3=C.Header,
         BorderSizePixel=0, ZIndex=3, Parent=Main,
     },{New("UICorner",{CornerRadius=UDim.new(0,8)})})
     New("Frame",{Size=UDim2.new(1,0,0.5,0),Position=UDim2.new(0,0,0.5,0),
-        BackgroundColor3=Color3.fromRGB(13,13,23),BackgroundTransparency=0,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
+        BackgroundColor3=C.Header,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
     New("Frame",{Size=UDim2.new(1,0,0,1),Position=UDim2.new(0,0,1,-1),
         BackgroundColor3=C.Border,BorderSizePixel=0,ZIndex=4,Parent=Hdr})
 
-    -- ICON: cfg.Icon ile istedigin asset ID'yi ver, yoksa gizlenir
-    local titleOffset = 10
+    local _iconF=New("Frame",{Size=UDim2.new(0,26,0,26),Position=UDim2.new(0,10,0,7),
+        BackgroundColor3=C.AvatarPink,BorderSizePixel=0,ZIndex=4,Parent=Hdr})
+    New("UICorner",{CornerRadius=UDim.new(1,0),Parent=_iconF})
     if cfg.Icon then
-        titleOffset = 42
-        local iconFrame = New("Frame",{Size=UDim2.new(0,28,0,28),Position=UDim2.new(0,8,0,6),
-            BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.5,
-            BorderSizePixel=0,ZIndex=4,Parent=Hdr})
-        New("UICorner",{CornerRadius=UDim.new(1,0),Parent=iconFrame})
-        local iconLbl = New("ImageLabel",{
-            Size=UDim2.new(1,0,1,0),
-            BackgroundTransparency=1,
-            Image=cfg.Icon,
-            ScaleType=Enum.ScaleType.Fit,
-            ZIndex=5,Parent=iconFrame,
-        })
-        New("UICorner",{CornerRadius=UDim.new(1,0),Parent=iconLbl})
+        local _img=New("ImageLabel",{Size=UDim2.new(1,0,1,0),BackgroundTransparency=1,
+            Image=cfg.Icon,ScaleType=Enum.ScaleType.Fit,ZIndex=5,Parent=_iconF})
+        New("UICorner",{CornerRadius=UDim.new(1,0),Parent=_img})
+    else
+        New("TextLabel",{Size=UDim2.new(1,0,1,0),BackgroundTransparency=1,
+            Text="🐱",TextScaled=true,Font=Enum.Font.GothamBold,
+            TextColor3=C.White,ZIndex=5,Parent=_iconF})
     end
-    New("TextLabel",{Size=UDim2.new(1,-80,1,0),Position=UDim2.new(0,titleOffset,0,0),
+    New("TextLabel",{Size=UDim2.new(0,80,1,0),Position=UDim2.new(0,40,0,0),
         BackgroundTransparency=1,Text=title,Font=Enum.Font.GothamBold,
         TextSize=15,TextColor3=C.White,TextXAlignment=Enum.TextXAlignment.Left,ZIndex=4,Parent=Hdr})
 
@@ -173,8 +155,7 @@ function Feral:CreateWindow(cfg)
     -- SIDEBAR
     local SB=New("Frame",{
         Size=UDim2.new(0,SB_W,1,0),
-        BackgroundColor3=Color3.fromRGB(13,13,23), -- sidebar
-        BackgroundTransparency=0,BorderSizePixel=0,Parent=Body,
+        BackgroundColor3=C.Sidebar,BorderSizePixel=0,Parent=Body,
     },{New("UIStroke",{Color=C.Border,Thickness=1})})
 
     New("TextLabel",{Size=UDim2.new(1,-10,0,28),Position=UDim2.new(0,10,0,4),
@@ -190,7 +171,7 @@ function Feral:CreateWindow(cfg)
     -- PANEL
     local Panel=New("Frame",{
         Size=UDim2.new(1,-SB_W,1,0),Position=UDim2.new(0,SB_W,0,0),
-        BackgroundColor3=Color3.fromRGB(16,16,28), -- sag panel
+        BackgroundColor3=Color3.fromRGB(22,22,35),
         BackgroundTransparency=0,BorderSizePixel=0,Parent=Body,
     })
     local TitleRow=New("Frame",{Size=UDim2.new(1,0,0,30),BackgroundTransparency=1,Parent=Panel})
@@ -240,7 +221,6 @@ function Feral:CreateWindow(cfg)
     end
 
     function Window:Destroy()
-        pcall(function() BlurEffect:Destroy() end)
         GUI:Destroy()
     end
 
@@ -340,7 +320,7 @@ function Feral:CreateWindow(cfg)
             local ChkBg=New("Frame",{
                 Size=UDim2.new(0,16,0,16),
                 Position=UDim2.new(1,-30,0,hd and 18 or 10),
-                BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0,BorderSizePixel=0,Parent=Row,
+                BackgroundColor3=C.BgMain,BorderSizePixel=0,Parent=Row,
             },{
                 New("UICorner",{CornerRadius=UDim.new(0,3)}),
                 New("UIStroke",{Color=C.ChkBorder,Thickness=1.5}),
@@ -473,7 +453,7 @@ function Feral:CreateWindow(cfg)
             })
             local IBg=New("Frame",{
                 Size=UDim2.new(1,-28,0,22),Position=UDim2.new(0,14,0,26),
-                BackgroundColor3=C.InputBg,BackgroundTransparency=0.75,BorderSizePixel=0,Parent=Row,
+                BackgroundColor3=C.InputBg,BorderSizePixel=0,Parent=Row,
             },{
                 New("UICorner",{CornerRadius=UDim.new(0,4)}),
                 New("UIStroke",{Color=C.InputBord,Thickness=1}),
