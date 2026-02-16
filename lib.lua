@@ -1,37 +1,41 @@
--- FERAL UI LIBRARY
--- Bu dosyayı rawgit/pastebin'e yükle, sonra loadstring ile çağır
+-- ════════════════════════════════════════════════════════════════
+--   ROTHUB / FERAL UI LIBRARY
+--   Loading Screen + Menu
+-- ════════════════════════════════════════════════════════════════
 
 local Players          = game:GetService("Players")
 local TweenService     = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
+local RunService       = game:GetService("RunService")
 local LocalPlayer      = Players.LocalPlayer
 local Mouse            = LocalPlayer:GetMouse()
 
 local C = {
-    -- ✏️ RENK PALETİ
-    BgMain     = Color3.fromRGB(22, 22, 35),   -- satir arkaplan
-    BgRowHov   = Color3.fromRGB(30, 30, 48),   -- hover
-    Sidebar    = Color3.fromRGB(17, 17, 27),   -- sol sidebar
-    Header     = Color3.fromRGB(17, 17, 27),   -- header
-    Border     = Color3.fromRGB(44, 44, 68),   -- kenar cizgi
-    Accent     = Color3.fromRGB(74, 122, 255), -- mavi vurgu
-    TxtMain    = Color3.fromRGB(220, 222, 246),-- ana yazi
-    TxtSub     = Color3.fromRGB(95, 98, 152),  -- alt aciklama
-    TxtMuted   = Color3.fromRGB(68, 68, 115),  -- silik yazi
-    TxtTab     = Color3.fromRGB(255, 255, 255),-- aktif tab
-    TxtTabOff  = Color3.fromRGB(115, 115, 170),-- pasif tab
-    ChkBg      = Color3.fromRGB(13, 13, 22),   -- checkbox acik
-    ChkBorder  = Color3.fromRGB(52, 52, 88),   -- checkbox kenar
-    SliderBg   = Color3.fromRGB(28, 28, 50),   -- slider track
-    SliderFill = Color3.fromRGB(74, 122, 255), -- slider dolu
-    InputBg    = Color3.fromRGB(13, 13, 22),   -- input arkaplan
-    InputBord  = Color3.fromRGB(44, 44, 68),   -- input kenar
-    BtnBg      = Color3.fromRGB(22, 22, 38),   -- buton arkaplan
-    BtnBord    = Color3.fromRGB(52, 52, 88),   -- buton kenar
-    BtnHov     = Color3.fromRGB(32, 32, 52),   -- buton hover
-    Divider    = Color3.fromRGB(44, 44, 68),   -- satir arasi cizgi
+    BgMain     = Color3.fromRGB(22, 22, 35),
+    BgRowHov   = Color3.fromRGB(30, 30, 48),
+    Sidebar    = Color3.fromRGB(17, 17, 27),
+    Header     = Color3.fromRGB(17, 17, 27),
+    Border     = Color3.fromRGB(44, 44, 68),
+    Accent     = Color3.fromRGB(74, 122, 255),
+    TxtMain    = Color3.fromRGB(220, 222, 246),
+    TxtSub     = Color3.fromRGB(95, 98, 152),
+    TxtMuted   = Color3.fromRGB(68, 68, 115),
+    TxtTab     = Color3.fromRGB(255, 255, 255),
+    TxtTabOff  = Color3.fromRGB(115, 115, 170),
+    ChkBg      = Color3.fromRGB(13, 13, 22),
+    ChkBorder  = Color3.fromRGB(52, 52, 88),
+    SliderBg   = Color3.fromRGB(28, 28, 50),
+    SliderFill = Color3.fromRGB(74, 122, 255),
+    InputBg    = Color3.fromRGB(13, 13, 22),
+    InputBord  = Color3.fromRGB(44, 44, 68),
+    BtnBg      = Color3.fromRGB(22, 22, 38),
+    BtnBord    = Color3.fromRGB(52, 52, 88),
+    BtnHov     = Color3.fromRGB(32, 32, 52),
+    Divider    = Color3.fromRGB(44, 44, 68),
     AvatarPink = Color3.fromRGB(230, 155, 188),
     White      = Color3.fromRGB(255, 255, 255),
+    LoadingBar = Color3.fromRGB(220, 80, 80),
+    LoadingBg  = Color3.fromRGB(60, 60, 80),
 }
 
 local function New(cls, props, kids)
@@ -68,6 +72,163 @@ local function Drag(frame, handle)
 end
 
 -- ══════════════════════════════════════
+-- LOADING SCREEN
+-- ══════════════════════════════════════
+local function ShowLoadingScreen(gui, callback)
+    local LoadFrame = New("Frame", {
+        Name = "LoadingScreen",
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+        BackgroundTransparency = 0.3,
+        ZIndex = 50,
+        Parent = gui,
+    })
+
+    -- Blur arka plan efekti
+    local blur = New("BlurEffect", {
+        Name = "FeralBlur",
+        Size = 20,
+        Parent = game:GetService("Lighting"),
+    })
+
+    -- Üst çizgi (beyaz dekoratif)
+    local TopLine = New("Frame", {
+        Size = UDim2.new(0, 200, 0, 2),
+        Position = UDim2.new(0.5, -100, 0.5, -50),
+        BackgroundColor3 = Color3.fromRGB(180, 180, 200),
+        BorderSizePixel = 0,
+        ZIndex = 51,
+        Parent = LoadFrame,
+    })
+
+    -- Kullanıcı adı (üstte küçük yazı)
+    local UserLabel = New("TextLabel", {
+        Size = UDim2.new(0, 200, 0, 18),
+        Position = UDim2.new(0.5, -100, 0.5, -70),
+        BackgroundTransparency = 1,
+        Text = LocalPlayer.Name,
+        Font = Enum.Font.Gotham,
+        TextSize = 12,
+        TextColor3 = Color3.fromRGB(180, 180, 200),
+        ZIndex = 51,
+        Parent = LoadFrame,
+    })
+
+    -- ROTHUB harfleri
+    local letters = {"R", "O", "T", "H", "U", "B"}
+    local letterLabels = {}
+    local totalWidth = #letters * 55
+    local startX = -totalWidth / 2
+
+    local LetterContainer = New("Frame", {
+        Size = UDim2.new(0, totalWidth, 0, 70),
+        Position = UDim2.new(0.5, startX, 0.5, -40),
+        BackgroundTransparency = 1,
+        ZIndex = 51,
+        Parent = LoadFrame,
+    })
+
+    for i, letter in ipairs(letters) do
+        local lbl = New("TextLabel", {
+            Size = UDim2.new(0, 50, 0, 70),
+            Position = UDim2.new(0, (i - 1) * 55, 0, 0),
+            BackgroundTransparency = 1,
+            Text = letter,
+            Font = Enum.Font.GothamBold,
+            TextSize = 52,
+            TextColor3 = C.White,
+            ZIndex = 52,
+            Parent = LetterContainer,
+        })
+        table.insert(letterLabels, lbl)
+    end
+
+    -- Alt kırmızı loading bar
+    local BarBg = New("Frame", {
+        Size = UDim2.new(0, 260, 0, 3),
+        Position = UDim2.new(0.5, -130, 0.5, 40),
+        BackgroundColor3 = C.LoadingBg,
+        BorderSizePixel = 0,
+        ZIndex = 51,
+        Parent = LoadFrame,
+    })
+    New("UICorner", {CornerRadius = UDim.new(1, 0), Parent = BarBg})
+
+    local BarFill = New("Frame", {
+        Size = UDim2.new(0, 0, 1, 0),
+        BackgroundColor3 = C.LoadingBar,
+        BorderSizePixel = 0,
+        ZIndex = 52,
+        Parent = BarBg,
+    })
+    New("UICorner", {CornerRadius = UDim.new(1, 0), Parent = BarFill})
+
+    -- Status yazısı
+    local StatusLabel = New("TextLabel", {
+        Size = UDim2.new(0, 260, 0, 18),
+        Position = UDim2.new(0.5, -130, 0.5, 48),
+        BackgroundTransparency = 1,
+        Text = "loading assets...",
+        Font = Enum.Font.Gotham,
+        TextSize = 11,
+        TextColor3 = Color3.fromRGB(140, 140, 170),
+        ZIndex = 51,
+        Parent = LoadFrame,
+    })
+
+    -- Harf animasyonu (yukarı aşağı bounce)
+    local bounceConn
+    local startTime = tick()
+    bounceConn = RunService.RenderStepped:Connect(function()
+        local t = tick() - startTime
+        for i, lbl in ipairs(letterLabels) do
+            local offset = math.sin((t * 3) + (i * 0.6)) * 10
+            lbl.Position = UDim2.new(0, (i - 1) * 55, 0, offset)
+        end
+    end)
+
+    -- Loading bar animasyonu
+    local loadStages = {
+        {pct = 0.2,  text = "loading assets..."},
+        {pct = 0.4,  text = "checking executor..."},
+        {pct = 0.6,  text = "initializing modules..."},
+        {pct = 0.8,  text = "preparing interface..."},
+        {pct = 1.0,  text = "done!"},
+    }
+
+    task.spawn(function()
+        for _, stage in ipairs(loadStages) do
+            StatusLabel.Text = stage.text
+            Tw(BarFill, {Size = UDim2.new(stage.pct, 0, 1, 0)}, 0.4)
+            task.wait(0.6)
+        end
+
+        task.wait(0.3)
+
+        -- Bounce animasyonu durdur
+        if bounceConn then bounceConn:Disconnect() end
+
+        -- Fade out
+        Tw(LoadFrame, {BackgroundTransparency = 1}, 0.4)
+        for _, lbl in ipairs(letterLabels) do
+            Tw(lbl, {TextTransparency = 1}, 0.3)
+        end
+        Tw(TopLine, {BackgroundTransparency = 1}, 0.3)
+        Tw(UserLabel, {TextTransparency = 1}, 0.3)
+        Tw(BarBg, {BackgroundTransparency = 1}, 0.3)
+        Tw(BarFill, {BackgroundTransparency = 1}, 0.3)
+        Tw(StatusLabel, {TextTransparency = 1}, 0.3)
+        Tw(blur, {Size = 0}, 0.4)
+
+        task.wait(0.5)
+        LoadFrame:Destroy()
+        blur:Destroy()
+
+        if callback then callback() end
+    end)
+end
+
+-- ══════════════════════════════════════
 -- FERAL LIBRARY
 -- ══════════════════════════════════════
 local Feral = {}
@@ -94,11 +255,13 @@ function Feral:CreateWindow(cfg)
         Parent=game.CoreGui,
     })
 
+    -- Ana menu frame (başta gizli)
     local Main = New("Frame", {
         Size=UDim2.new(0,W,0,H),
         Position=UDim2.new(0.5,-W/2,0.5,-H/2),
         BackgroundColor3=C.BgMain,
         BorderSizePixel=0, ClipsDescendants=true,
+        Visible=false,
         Parent=GUI,
     },{
         New("UICorner",{CornerRadius=UDim.new(0,8)}),
@@ -186,11 +349,6 @@ function Feral:CreateWindow(cfg)
         Font=Enum.Font.GothamBold,TextColor3=C.TxtMuted,Parent=TitleRow})
     New("Frame",{Size=UDim2.new(1,0,0,1),Position=UDim2.new(0,0,1,-1),
         BackgroundColor3=C.Divider,BorderSizePixel=0,Parent=TitleRow})
-
-    -- Açılış animasyonu
-    Main.Size=UDim2.new(0,W,0,0)
-    Main.Position=UDim2.new(0.5,-W/2,0.5,0)
-    Tw(Main,{Size=UDim2.new(0,W,0,H),Position=UDim2.new(0.5,-W/2,0.5,-H/2)},.22)
 
     local TabBtns  = {}
     local TabOrder = 0
@@ -537,6 +695,14 @@ function Feral:CreateWindow(cfg)
         table.insert(Window._tabs, Tab)
         return Tab
     end
+
+    -- Loading screen göster, bitince menüyü aç
+    ShowLoadingScreen(GUI, function()
+        Main.Visible = true
+        Main.Size = UDim2.new(0, W, 0, 0)
+        Main.Position = UDim2.new(0.5, -W/2, 0.5, 0)
+        Tw(Main, {Size = UDim2.new(0, W, 0, H), Position = UDim2.new(0.5, -W/2, 0.5, -H/2)}, .25)
+    end)
 
     return Window
 end
