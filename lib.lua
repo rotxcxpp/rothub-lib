@@ -23,12 +23,12 @@ local C = {
     ChkBorder  = Color3.fromRGB(55, 55, 95),
     SliderBg   = Color3.fromRGB(32, 32, 56),
     SliderFill = Color3.fromRGB(74, 122, 255),
-    InputBg    = Color3.fromRGB(18, 18, 32),
-    InputBord  = Color3.fromRGB(50, 50, 88),
+    InputBg    = Color3.fromRGB(92, 94, 89), -- #5c5e59 - INPUT ARKAPLAN
+    InputBord  = Color3.fromRGB(92, 94, 89), -- #5c5e59 - INPUT KENAR
     BtnBg      = Color3.fromRGB(28, 28, 52),
     BtnBord    = Color3.fromRGB(55, 55, 100),
     BtnHov     = Color3.fromRGB(40, 40, 72),
-    Divider    = Color3.fromRGB(35, 35, 60),
+    Divider    = Color3.fromRGB(135, 135, 135), -- #878787 - SATIR CIZGISI
     AvatarPink = Color3.fromRGB(230, 155, 188),
     White      = Color3.fromRGB(255, 255, 255),
 }
