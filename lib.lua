@@ -472,7 +472,7 @@ function Feral:CreateWindow(cfg)
             })
             local IBg=New("Frame",{
                 Size=UDim2.new(1,-28,0,22),Position=UDim2.new(0,14,0,26),
-                BackgroundColor3=C.InputBg,BorderSizePixel=0,Parent=Row,
+                BackgroundColor3=C.InputBg,BackgroundTransparency=0.75,BorderSizePixel=0,Parent=Row,
             },{
                 New("UICorner",{CornerRadius=UDim.new(0,4)}),
                 New("UIStroke",{Color=C.InputBord,Thickness=1}),
