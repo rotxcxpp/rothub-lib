@@ -79,7 +79,7 @@ local function ShowLoadingScreen(gui, callback)
         Name = "LoadingScreen",
         Size = UDim2.new(1, 0, 1, 0),
         BackgroundColor3 = Color3.fromRGB(0, 0, 0),
-        BackgroundTransparency = 0,
+        BackgroundTransparency = 0.3,
         ZIndex = 50,
         Parent = gui,
     })
@@ -94,7 +94,7 @@ local function ShowLoadingScreen(gui, callback)
     -- Üst çizgi (beyaz dekoratif)
     local TopLine = New("Frame", {
         Size = UDim2.new(0, 200, 0, 2),
-        Position = UDim2.new(0.5, -100, 0.5, -50),
+        Position = UDim2.new(0.5, -100, 0, 30),
         BackgroundColor3 = Color3.fromRGB(180, 180, 200),
         BorderSizePixel = 0,
         ZIndex = 51,
@@ -109,7 +109,7 @@ local function ShowLoadingScreen(gui, callback)
 
     local LetterContainer = New("Frame", {
         Size = UDim2.new(0, totalWidth, 0, 70),
-        Position = UDim2.new(0.5, startX, 0.5, -40),
+        Position = UDim2.new(0.5, startX, 0, 35),
         BackgroundTransparency = 1,
         ZIndex = 51,
         Parent = LoadFrame,
@@ -133,7 +133,7 @@ local function ShowLoadingScreen(gui, callback)
     -- Alt kırmızı loading bar
     local BarBg = New("Frame", {
         Size = UDim2.new(0, 260, 0, 3),
-        Position = UDim2.new(0.5, -130, 0.5, 40),
+        Position = UDim2.new(0.5, -130, 0, 110),
         BackgroundColor3 = C.LoadingBg,
         BorderSizePixel = 0,
         ZIndex = 51,
@@ -153,7 +153,7 @@ local function ShowLoadingScreen(gui, callback)
     -- Status yazısı
     local StatusLabel = New("TextLabel", {
         Size = UDim2.new(0, 260, 0, 18),
-        Position = UDim2.new(0.5, -130, 0.5, 48),
+        Position = UDim2.new(0.5, -130, 0, 116),
         BackgroundTransparency = 1,
         Text = "loading assets...",
         Font = Enum.Font.Gotham,
