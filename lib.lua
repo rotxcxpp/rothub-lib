@@ -89,12 +89,13 @@ function Feral:CreateWindow(cfg)
     local GUI = New("ScreenGui", {
         Name="FeralMenu", ResetOnSpawn=false,
         ZIndexBehavior=Enum.ZIndexBehavior.Sibling,
+        DisplayOrder=999,
         Parent=game.CoreGui,
     })
 
     -- Arka plan blur (Fluent tarzı frosted glass)
     local BlurEffect = Instance.new("BlurEffect")
-    BlurEffect.Size = 16
+    BlurEffect.Size = 8
     BlurEffect.Name = "FeralBlur"
     BlurEffect.Parent = game:GetService("Lighting")
 
@@ -107,7 +108,7 @@ function Feral:CreateWindow(cfg)
         Size=UDim2.new(0,W,0,H),
         Position=UDim2.new(0.5,-W/2,0.5,-H/2),
         BackgroundColor3=Color3.fromRGB(0,0,0),
-        BackgroundTransparency=0.35,
+        BackgroundTransparency=0.2,
         BorderSizePixel=0, ClipsDescendants=true,
         Parent=GUI,
     },{
@@ -119,21 +120,22 @@ function Feral:CreateWindow(cfg)
     local Hdr = New("Frame",{
         Size=UDim2.new(1,0,0,HDR_H),
         BackgroundColor3=Color3.fromRGB(0,0,0),
-        BackgroundTransparency=0.2,
+        BackgroundTransparency=0.15,
         BorderSizePixel=0, ZIndex=3, Parent=Main,
     },{New("UICorner",{CornerRadius=UDim.new(0,8)})})
     New("Frame",{Size=UDim2.new(1,0,0.5,0),Position=UDim2.new(0,0,0.5,0),
-        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.2,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
+        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.15,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
     New("Frame",{Size=UDim2.new(1,0,0,1),Position=UDim2.new(0,0,1,-1),
         BackgroundColor3=C.Border,BorderSizePixel=0,ZIndex=4,Parent=Hdr})
 
+    local iconImage = cfg.Icon or "rbxassetid://6031075938" -- varsayilan ikon
     New("Frame",{Size=UDim2.new(0,28,0,28),Position=UDim2.new(0,9,0,6),
-        BackgroundColor3=Color3.fromRGB(20,20,35),BorderSizePixel=0,ZIndex=4,Parent=Hdr},{
+        BackgroundColor3=Color3.fromRGB(10,10,20),BorderSizePixel=0,ZIndex=4,Parent=Hdr},{
         New("UICorner",{CornerRadius=UDim.new(1,0)}),
         New("ImageLabel",{
             Size=UDim2.new(1,0,1,0),
             BackgroundTransparency=1,
-            Image="rbxthumb://type=AvatarHeadShot&id="..tostring(Players.LocalPlayer.UserId).."&w=60&h=60",
+            Image=iconImage,
             ScaleType=Enum.ScaleType.Fit,
             ZIndex=5,
         },{New("UICorner",{CornerRadius=UDim.new(1,0)})}),
@@ -165,7 +167,7 @@ function Feral:CreateWindow(cfg)
     -- SIDEBAR
     local SB=New("Frame",{
         Size=UDim2.new(0,SB_W,1,0),
-        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.45,BorderSizePixel=0,Parent=Body,
+        BackgroundColor3=Color3.fromRGB(0,0,0),BackgroundTransparency=0.25,BorderSizePixel=0,Parent=Body,
     },{New("UIStroke",{Color=C.Border,Thickness=1})})
 
     New("TextLabel",{Size=UDim2.new(1,-10,0,28),Position=UDim2.new(0,10,0,4),
