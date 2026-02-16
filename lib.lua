@@ -8,7 +8,7 @@ local LocalPlayer      = Players.LocalPlayer
 local Mouse            = LocalPlayer:GetMouse()
 
 local C = {
-    BgMain     = Color3.fromRGB(15, 15, 26),
+    BgMain     = Color3.fromRGB(30, 30, 30), -- #1e1e1e - BUTON/SATIR ARKAPLAN
     BgRowHov   = Color3.fromRGB(28, 28, 46),
     Sidebar    = Color3.fromRGB(11, 11, 20),
     Header     = Color3.fromRGB(13, 13, 23),
@@ -28,7 +28,7 @@ local C = {
     BtnBg      = Color3.fromRGB(28, 28, 52),
     BtnBord    = Color3.fromRGB(55, 55, 100),
     BtnHov     = Color3.fromRGB(40, 40, 72),
-    Divider    = Color3.fromRGB(135, 135, 135), -- #878787 - SATIR CIZGISI
+    Divider    = Color3.fromRGB(28, 25, 28), -- #1c191c - SATIR ARASI CIZGI
     AvatarPink = Color3.fromRGB(230, 155, 188),
     White      = Color3.fromRGB(255, 255, 255),
 }
@@ -107,7 +107,7 @@ function Feral:CreateWindow(cfg)
     local Main = New("Frame", {
         Size=UDim2.new(0,W,0,H),
         Position=UDim2.new(0.5,-W/2,0.5,-H/2),
-        BackgroundColor3=Color3.fromRGB(23,25,26), -- #17191a - ANA CERCEVE RENGI
+        BackgroundColor3=Color3.fromRGB(30,30,30), -- #1e1e1e - ANA CERCEVE RENGI
         BackgroundTransparency=0,
         BorderSizePixel=0, ClipsDescendants=true,
         Parent=GUI,
@@ -172,7 +172,7 @@ function Feral:CreateWindow(cfg)
     -- SIDEBAR
     local SB=New("Frame",{
         Size=UDim2.new(0,SB_W,1,0),
-        BackgroundColor3=Color3.fromRGB(31,31,31), -- #1f1f1f - SOL SIDEBAR RENGI
+        BackgroundColor3=Color3.fromRGB(33,31,31), -- #211f1f - SOL SIDEBAR RENGI
         BackgroundTransparency=0,BorderSizePixel=0,Parent=Body,
     },{New("UIStroke",{Color=C.Border,Thickness=1})})
 
@@ -189,7 +189,7 @@ function Feral:CreateWindow(cfg)
     -- PANEL
     local Panel=New("Frame",{
         Size=UDim2.new(1,-SB_W,1,0),Position=UDim2.new(0,SB_W,0,0),
-        BackgroundColor3=Color3.fromRGB(23,25,26), -- #17191a - SAG PANEL RENGI
+        BackgroundColor3=Color3.fromRGB(30,30,30), -- #1e1e1e - SAG PANEL RENGI
         BackgroundTransparency=0,BorderSizePixel=0,Parent=Body,
     })
     local TitleRow=New("Frame",{Size=UDim2.new(1,0,0,30),BackgroundTransparency=1,Parent=Panel})
