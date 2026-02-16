@@ -11,36 +11,31 @@ local LocalPlayer      = Players.LocalPlayer
 local Mouse            = LocalPlayer:GetMouse()
 
 local C = {
-    BgMain     = Color3.fromRGB(25, 25, 40),
-    BgMainT    = 0.15,                          -- ana bg transparency
-    BgRowHov   = Color3.fromRGB(35, 35, 55),
-    Sidebar    = Color3.fromRGB(20, 20, 32),
-    SidebarT   = 0.08,                          -- sidebar transparency
-    Header     = Color3.fromRGB(20, 20, 32),
-    HeaderT    = 0.08,
-    Border     = Color3.fromRGB(55, 55, 80),
-    Accent     = Color3.fromRGB(74, 144, 255),
-    TxtMain    = Color3.fromRGB(225, 225, 245),
-    TxtSub     = Color3.fromRGB(120, 120, 165),
-    TxtMuted   = Color3.fromRGB(80, 80, 120),
+    BgMain     = Color3.fromRGB(22, 22, 35),
+    BgRowHov   = Color3.fromRGB(30, 30, 48),
+    Sidebar    = Color3.fromRGB(17, 17, 27),
+    Header     = Color3.fromRGB(17, 17, 27),
+    Border     = Color3.fromRGB(44, 44, 68),
+    Accent     = Color3.fromRGB(74, 122, 255),
+    TxtMain    = Color3.fromRGB(220, 222, 246),
+    TxtSub     = Color3.fromRGB(95, 98, 152),
+    TxtMuted   = Color3.fromRGB(68, 68, 115),
     TxtTab     = Color3.fromRGB(255, 255, 255),
-    TxtTabOff  = Color3.fromRGB(135, 135, 180),
-    ChkBg      = Color3.fromRGB(18, 18, 30),
-    ChkBorder  = Color3.fromRGB(60, 60, 95),
-    SliderBg   = Color3.fromRGB(30, 30, 52),
-    SliderFill = Color3.fromRGB(74, 144, 255),
-    InputBg    = Color3.fromRGB(15, 15, 28),
-    InputBord  = Color3.fromRGB(50, 50, 78),
-    BtnBg      = Color3.fromRGB(25, 25, 42),
-    BtnBord    = Color3.fromRGB(58, 58, 92),
-    BtnHov     = Color3.fromRGB(38, 38, 60),
-    Divider    = Color3.fromRGB(50, 50, 75),
+    TxtTabOff  = Color3.fromRGB(115, 115, 170),
+    ChkBg      = Color3.fromRGB(13, 13, 22),
+    ChkBorder  = Color3.fromRGB(52, 52, 88),
+    SliderBg   = Color3.fromRGB(28, 28, 50),
+    SliderFill = Color3.fromRGB(74, 122, 255),
+    InputBg    = Color3.fromRGB(13, 13, 22),
+    InputBord  = Color3.fromRGB(44, 44, 68),
+    BtnBg      = Color3.fromRGB(22, 22, 38),
+    BtnBord    = Color3.fromRGB(52, 52, 88),
+    BtnHov     = Color3.fromRGB(32, 32, 52),
+    Divider    = Color3.fromRGB(44, 44, 68),
     AvatarPink = Color3.fromRGB(230, 155, 188),
     White      = Color3.fromRGB(255, 255, 255),
     LoadingBar = Color3.fromRGB(220, 80, 80),
     LoadingBg  = Color3.fromRGB(60, 60, 80),
-    PanelBg    = Color3.fromRGB(28, 28, 44),
-    PanelT     = 0.12,
 }
 
 local function New(cls, props, kids)
@@ -102,19 +97,6 @@ local function ShowLoadingScreen(gui, callback)
         Position = UDim2.new(0.5, -100, 0.5, -50),
         BackgroundColor3 = Color3.fromRGB(180, 180, 200),
         BorderSizePixel = 0,
-        ZIndex = 51,
-        Parent = LoadFrame,
-    })
-
-    -- Kullanıcı adı (üstte küçük yazı)
-    local UserLabel = New("TextLabel", {
-        Size = UDim2.new(0, 200, 0, 18),
-        Position = UDim2.new(0.5, -100, 0.5, -70),
-        BackgroundTransparency = 1,
-        Text = LocalPlayer.Name,
-        Font = Enum.Font.Gotham,
-        TextSize = 12,
-        TextColor3 = Color3.fromRGB(180, 180, 200),
         ZIndex = 51,
         Parent = LoadFrame,
     })
@@ -219,7 +201,6 @@ local function ShowLoadingScreen(gui, callback)
             Tw(lbl, {TextTransparency = 1}, 0.3)
         end
         Tw(TopLine, {BackgroundTransparency = 1}, 0.3)
-        Tw(UserLabel, {TextTransparency = 1}, 0.3)
         Tw(BarBg, {BackgroundTransparency = 1}, 0.3)
         Tw(BarFill, {BackgroundTransparency = 1}, 0.3)
         Tw(StatusLabel, {TextTransparency = 1}, 0.3)
@@ -265,7 +246,6 @@ function Feral:CreateWindow(cfg)
         Size=UDim2.new(0,W,0,H),
         Position=UDim2.new(0.5,-W/2,0.5,-H/2),
         BackgroundColor3=C.BgMain,
-        BackgroundTransparency=C.BgMainT,
         BorderSizePixel=0, ClipsDescendants=true,
         Visible=false,
         Parent=GUI,
@@ -278,11 +258,10 @@ function Feral:CreateWindow(cfg)
     local Hdr = New("Frame",{
         Size=UDim2.new(1,0,0,HDR_H),
         BackgroundColor3=C.Header,
-        BackgroundTransparency=C.HeaderT,
         BorderSizePixel=0, ZIndex=3, Parent=Main,
     },{New("UICorner",{CornerRadius=UDim.new(0,8)})})
     New("Frame",{Size=UDim2.new(1,0,0.5,0),Position=UDim2.new(0,0,0.5,0),
-        BackgroundColor3=C.Header,BackgroundTransparency=C.HeaderT,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
+        BackgroundColor3=C.Header,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
     New("Frame",{Size=UDim2.new(1,0,0,1),Position=UDim2.new(0,0,1,-1),
         BackgroundColor3=C.Border,BorderSizePixel=0,ZIndex=4,Parent=Hdr})
 
@@ -325,7 +304,7 @@ function Feral:CreateWindow(cfg)
     -- SIDEBAR
     local SB=New("Frame",{
         Size=UDim2.new(0,SB_W,1,0),
-        BackgroundColor3=C.Sidebar,BackgroundTransparency=C.SidebarT,BorderSizePixel=0,Parent=Body,
+        BackgroundColor3=C.Sidebar,BorderSizePixel=0,Parent=Body,
     },{New("UIStroke",{Color=C.Border,Thickness=1})})
 
     New("TextLabel",{Size=UDim2.new(1,-10,0,28),Position=UDim2.new(0,10,0,4),
@@ -341,8 +320,8 @@ function Feral:CreateWindow(cfg)
     -- PANEL
     local Panel=New("Frame",{
         Size=UDim2.new(1,-SB_W,1,0),Position=UDim2.new(0,SB_W,0,0),
-        BackgroundColor3=C.PanelBg,
-        BackgroundTransparency=C.PanelT,BorderSizePixel=0,Parent=Body,
+        BackgroundColor3=Color3.fromRGB(22,22,35),
+        BackgroundTransparency=0,BorderSizePixel=0,Parent=Body,
     })
     local TitleRow=New("Frame",{Size=UDim2.new(1,0,0,30),BackgroundTransparency=1,Parent=Panel})
     local TitleLbl=New("TextLabel",{
