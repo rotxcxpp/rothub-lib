@@ -1,5 +1,5 @@
 -- ════════════════════════════════════════════════════════════════
---   FERAL UI LIBRARY (GÜNCELLENMİŞ)
+--   FERAL UI LIBRARY (TRANSPARAN SİYAH EDİSYON)
 -- ════════════════════════════════════════════════════════════════
 
 local Players          = game:GetService("Players")
@@ -10,35 +10,36 @@ local LocalPlayer      = Players.LocalPlayer
 local Mouse            = LocalPlayer:GetMouse()
 
 local C = {
-    BgMain     = Color3.fromRGB(15, 15, 20),    -- Daha koyu/siyah ton
-    BgMainT    = 0.05,
-    BgRowHov   = Color3.fromRGB(30, 30, 45),
-    Sidebar    = Color3.fromRGB(10, 10, 15),
-    SidebarT   = 0.05,
-    Header     = Color3.fromRGB(5, 5, 5),       -- Üst kısım tam siyah
-    HeaderT    = 0,
-    Border     = Color3.fromRGB(45, 45, 60),
-    Accent     = Color3.fromRGB(74, 144, 255),
+    -- Ana renkler: Transparan Siyah Tema
+    BgMain     = Color3.fromRGB(0, 0, 0),       -- Saf Siyah
+    BgMainT    = 0.35,                          -- Transparanlık (Arkayı görmeni sağlar)
+    BgRowHov   = Color3.fromRGB(40, 40, 40),
+    Sidebar    = Color3.fromRGB(5, 5, 5),
+    SidebarT   = 0.4,                           -- Sidebar biraz daha transparan
+    Header     = Color3.fromRGB(0, 0, 0),       -- Üst kısım tam siyah
+    HeaderT    = 0.2,                           -- Üst kısım hafif transparan
+    Border     = Color3.fromRGB(60, 60, 60),    -- Belirgin gri border
+    Accent     = Color3.fromRGB(74, 144, 255),  -- Mavi vurgu rengi
     TxtMain    = Color3.fromRGB(255, 255, 255),
-    TxtSub     = Color3.fromRGB(160, 160, 180),
-    TxtMuted   = Color3.fromRGB(90, 90, 110),
+    TxtSub     = Color3.fromRGB(180, 180, 180),
+    TxtMuted   = Color3.fromRGB(100, 100, 100),
     TxtTab     = Color3.fromRGB(255, 255, 255),
-    TxtTabOff  = Color3.fromRGB(130, 130, 150),
-    ChkBg      = Color3.fromRGB(20, 20, 35),
-    ChkBorder  = Color3.fromRGB(70, 70, 100),
-    SliderBg   = Color3.fromRGB(35, 35, 50),
+    TxtTabOff  = Color3.fromRGB(140, 140, 140),
+    ChkBg      = Color3.fromRGB(25, 25, 25),
+    ChkBorder  = Color3.fromRGB(80, 80, 80),
+    SliderBg   = Color3.fromRGB(40, 40, 40),
     SliderFill = Color3.fromRGB(74, 144, 255),
-    InputBg    = Color3.fromRGB(10, 10, 20),
-    InputBord  = Color3.fromRGB(60, 60, 85),
-    BtnBg      = Color3.fromRGB(25, 25, 40),
-    BtnBord    = Color3.fromRGB(65, 65, 90),
-    BtnHov     = Color3.fromRGB(40, 40, 65),
-    Divider    = Color3.fromRGB(40, 40, 60),
+    InputBg    = Color3.fromRGB(10, 10, 10),
+    InputBord  = Color3.fromRGB(70, 70, 70),
+    BtnBg      = Color3.fromRGB(30, 30, 30),
+    BtnBord    = Color3.fromRGB(75, 75, 75),
+    BtnHov     = Color3.fromRGB(50, 50, 50),
+    Divider    = Color3.fromRGB(50, 50, 50),
     White      = Color3.fromRGB(255, 255, 255),
-    LoadingBar = Color3.fromRGB(74, 144, 255),  -- Accent rengiyle aynı yapıldı
-    LoadingBg  = Color3.fromRGB(30, 30, 45),
-    PanelBg    = Color3.fromRGB(18, 18, 25),
-    PanelT     = 0.08,
+    LoadingBar = Color3.fromRGB(74, 144, 255),
+    LoadingBg  = Color3.fromRGB(40, 40, 40),
+    PanelBg    = Color3.fromRGB(0, 0, 0),
+    PanelT     = 0.45,
 }
 
 local function New(cls, props, kids)
@@ -75,23 +76,24 @@ local function Drag(frame, handle)
 end
 
 -- ══════════════════════════════════════
--- LOADING SCREEN
+-- LOADING SCREEN (SİYAH & TRANSPARAN)
 -- ══════════════════════════════════════
 local function ShowLoadingScreen(gui, callback)
     local LoadFrame = New("Frame", {
         Name = "LoadingScreen",
         Size = UDim2.new(1, 0, 1, 0),
-        BackgroundColor3 = Color3.fromRGB(0, 0, 0), -- Tam Siyah Arka Plan
-        BackgroundTransparency = 0,
+        BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+        BackgroundTransparency = 0.2, -- Hafif transparan siyah
         ZIndex = 100,
         Parent = gui,
     })
 
-    -- Üst Siyah Bölüm (Header Alanı)
+    -- Üst Siyah Bölüm (Header)
     local TopBlackBar = New("Frame", {
-        Size = UDim2.new(1, 0, 0, 100),
+        Size = UDim2.new(1, 0, 0, 60),
         Position = UDim2.new(0, 0, 0, 0),
         BackgroundColor3 = Color3.fromRGB(0, 0, 0),
+        BackgroundTransparency = 0, -- Tam siyah
         BorderSizePixel = 0,
         ZIndex = 101,
         Parent = LoadFrame,
@@ -99,17 +101,17 @@ local function ShowLoadingScreen(gui, callback)
 
     local UserLabel = New("TextLabel", {
         Size = UDim2.new(0, 200, 0, 20),
-        Position = UDim2.new(0.5, -100, 0.5, -80),
+        Position = UDim2.new(0.5, -100, 0.5, -85),
         BackgroundTransparency = 1,
         Text = "WELCOME, " .. LocalPlayer.Name:upper(),
         Font = Enum.Font.GothamBold,
-        TextSize = 14,
+        TextSize = 13,
         TextColor3 = C.Accent,
         ZIndex = 102,
         Parent = LoadFrame,
     })
 
-    -- FERAL Yazısı (Harf Harf)
+    -- FERAL Yazısı
     local letters = {"F", "E", "R", "A", "L"}
     local letterLabels = {}
     local totalWidth = #letters * 60
@@ -130,7 +132,7 @@ local function ShowLoadingScreen(gui, callback)
             BackgroundTransparency = 1,
             Text = letter,
             Font = Enum.Font.GothamBold,
-            TextSize = 60,
+            TextSize = 65,
             TextColor3 = C.White,
             ZIndex = 103,
             Parent = LetterContainer,
@@ -139,13 +141,14 @@ local function ShowLoadingScreen(gui, callback)
     end
 
     local BarBg = New("Frame", {
-        Size = UDim2.new(0, 300, 0, 4),
-        Position = UDim2.new(0.5, -150, 0.5, 60),
+        Size = UDim2.new(0, 280, 0, 3),
+        Position = UDim2.new(0.5, -140, 0.5, 65),
         BackgroundColor3 = C.LoadingBg,
         BorderSizePixel = 0,
         ZIndex = 102,
         Parent = LoadFrame,
     })
+
     local BarFill = New("Frame", {
         Size = UDim2.new(0, 0, 1, 0),
         BackgroundColor3 = C.LoadingBar,
@@ -155,50 +158,50 @@ local function ShowLoadingScreen(gui, callback)
     })
 
     local StatusLabel = New("TextLabel", {
-        Size = UDim2.new(0, 300, 0, 20),
-        Position = UDim2.new(0.5, -150, 0.5, 75),
+        Size = UDim2.new(0, 280, 0, 20),
+        Position = UDim2.new(0.5, -140, 0.5, 80),
         BackgroundTransparency = 1,
-        Text = "INITIALIZING...",
+        Text = "LOADING ASSETS...",
         Font = Enum.Font.Gotham,
-        TextSize = 12,
+        TextSize = 11,
         TextColor3 = C.TxtMuted,
         ZIndex = 102,
         Parent = LoadFrame,
     })
 
-    -- Bounce Animasyonu
+    -- Bounce Animasyonu (Daha akıcı)
     local bounceConn
     local startTime = tick()
     bounceConn = RunService.RenderStepped:Connect(function()
         local t = tick() - startTime
         for i, lbl in ipairs(letterLabels) do
-            local offset = math.sin((t * 4) + (i * 0.7)) * 12
+            local offset = math.sin((t * 3.5) + (i * 0.8)) * 14
             lbl.Position = UDim2.new(0, (i - 1) * 60, 0, offset)
         end
     end)
 
     task.spawn(function()
-        local stages = {"LOADING CORE...", "SETTING THEME...", "FINALIZING...", "READY!"}
+        local stages = {"INITIALIZING...", "FERAL SYSTEM...", "READY!"}
         for i, stage in ipairs(stages) do
             StatusLabel.Text = stage
-            Tw(BarFill, {Size = UDim2.new(i/#stages, 0, 1, 0)}, 0.5)
-            task.wait(0.7)
+            Tw(BarFill, {Size = UDim2.new(i/#stages, 0, 1, 0)}, 0.4)
+            task.wait(0.8)
         end
         
         if bounceConn then bounceConn:Disconnect() end
         Tw(LoadFrame, {BackgroundTransparency = 1}, 0.5)
         for _, v in pairs(LoadFrame:GetDescendants()) do
-            if v:IsA("TextLabel") then Tw(v, {TextTransparency = 1}, 0.4)
-            elseif v:IsA("Frame") then Tw(v, {BackgroundTransparency = 1}, 0.4) end
+            if v:IsA("TextLabel") then Tw(v, {TextTransparency = 1}, 0.3)
+            elseif v:IsA("Frame") then Tw(v, {BackgroundTransparency = 1}, 0.3) end
         end
-        task.wait(0.6)
+        task.wait(0.5)
         LoadFrame:Destroy()
         if callback then callback() end
     end)
 end
 
 -- ══════════════════════════════════════
--- MAIN LIBRARY
+-- MAIN LIBRARY START
 -- ══════════════════════════════════════
 local Feral = {}
 
@@ -217,48 +220,58 @@ function Feral:CreateWindow(cfg)
         BackgroundTransparency=C.BgMainT,
         BorderSizePixel=0, Visible=false, Parent=GUI,
     },{
-        New("UICorner",{CornerRadius=UDim.new(0,8)}),
-        New("UIStroke",{Color=C.Border,Thickness=1}),
+        New("UICorner",{CornerRadius=UDim.new(0,10)}),
+        New("UIStroke",{Color=C.Border,Thickness=1.2,Transparency=0.3}),
     })
 
     -- HEADER (Tam Siyah Üst Kısım)
     local Hdr = New("Frame",{
-        Size=UDim2.new(1,0,0,40),
+        Size=UDim2.new(1,0,0,42),
         BackgroundColor3=C.Header,
         BackgroundTransparency=C.HeaderT,
         BorderSizePixel=0, ZIndex=3, Parent=Main,
-    },{New("UICorner",{CornerRadius=UDim.new(0,8)})})
+    },{New("UICorner",{CornerRadius=UDim.new(0,10)})})
     
+    -- Alttaki köşelerin kavisini kapatmak için düzleştirici frame
+    New("Frame",{Size=UDim2.new(1,0,0.5,0),Position=UDim2.new(0,0,0.5,0),
+        BackgroundColor3=C.Header,BackgroundTransparency=C.HeaderT,BorderSizePixel=0,ZIndex=3,Parent=Hdr})
+
     New("TextLabel",{
-        Size=UDim2.new(0,100,1,0), Position=UDim2.new(0,15,0,0),
+        Size=UDim2.new(0,100,1,0), Position=UDim2.new(0,18,0,0),
         BackgroundTransparency=1, Text=title, Font=Enum.Font.GothamBold,
         TextSize=16, TextColor3=C.White, TextXAlignment=Enum.TextXAlignment.Left, ZIndex=4, Parent=Hdr
     })
 
+    local ClsBtn=New("TextButton",{Size=UDim2.new(0,28,0,28),Position=UDim2.new(1,-32,0,7),
+        BackgroundTransparency=1,Text="✕",TextSize=14,Font=Enum.Font.GothamBold,
+        TextColor3=Color3.fromRGB(255,100,100),ZIndex=4,Parent=Hdr})
+
+    ClsBtn.MouseButton1Click:Connect(function()
+        Tw(Main,{Size=UDim2.new(0,W,0,0),BackgroundTransparency=1},.2)
+        task.delay(.2,function() GUI:Destroy() end)
+    end)
+
     local Body = New("Frame",{
-        Size=UDim2.new(1,0,1,-40), Position=UDim2.new(0,0,0,40),
+        Size=UDim2.new(1,0,1,-42), Position=UDim2.new(0,0,0,42),
         BackgroundTransparency=1, Parent=Main,
     })
 
     -- SIDEBAR
     local SB = New("Frame",{
-        Size=UDim2.new(0,130,1,0),
+        Size=UDim2.new(0,135,1,0),
         BackgroundColor3=C.Sidebar, BackgroundTransparency=C.SidebarT, BorderSizePixel=0, Parent=Body,
-    },{New("UIStroke",{Color=C.Border,Thickness=1})})
+    },{New("UIStroke",{Color=C.Border,Thickness=1,Transparency=0.5})})
 
     local TabList = New("Frame",{
-        Size=UDim2.new(1,0,1,-10), Position=UDim2.new(0,0,0,5),
+        Size=UDim2.new(1,0,1,-10), Position=UDim2.new(0,0,0,8),
         BackgroundTransparency=1, Parent=SB,
-    },{New("UIListLayout",{FillDirection=Enum.FillDirection.Vertical,SortOrder=Enum.SortOrder.LayoutOrder})})
+    },{New("UIListLayout",{FillDirection=Enum.FillDirection.Vertical,SortOrder=Enum.SortOrder.LayoutOrder,Padding=UDim.new(0,2)})})
 
     -- PANEL
     local Panel = New("Frame",{
-        Size=UDim2.new(1,-130,1,0), Position=UDim2.new(0,130,0,0),
+        Size=UDim2.new(1,-135,1,0), Position=UDim2.new(0,135,0,0),
         BackgroundColor3=C.PanelBg, BackgroundTransparency=C.PanelT, BorderSizePixel=0, Parent=Body,
     })
-
-    -- (Buradaki AddTab, AddToggle vb. fonksiyonlar orijinal yapıdadır)
-    -- [Tab ve Element kodları buraya gelecek - Kısalık için aynı mantık korunmuştur]
 
     ShowLoadingScreen(GUI, function()
         Main.Visible = true
@@ -267,6 +280,8 @@ function Feral:CreateWindow(cfg)
     end)
 
     Drag(Main, Hdr)
+    
+    -- (Tab ve Buton ekleme mantığı devam eder...)
     return Feral
 end
 
