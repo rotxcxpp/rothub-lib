@@ -120,7 +120,7 @@ function Feral:CreateWindow(cfg)
     local Hdr = New("Frame",{
         Size=UDim2.new(1,0,0,HDR_H),
         BackgroundColor3=Color3.fromRGB(0,0,0),
-        BackgroundTransparency=0.45, -- ✏️ HEADER TRANSPARAN (0=opak, 1=tamamen şeffaf)
+        BackgroundTransparency=0.75, -- ✏️ HEADER TRANSPARAN (0=opak, 1=tamamen şeffaf)
         BorderSizePixel=0, ZIndex=3, Parent=Main,
     },{New("UICorner",{CornerRadius=UDim.new(0,8)})})
     New("Frame",{Size=UDim2.new(1,0,0.5,0),Position=UDim2.new(0,0,0.5,0),
@@ -560,3 +560,4 @@ function Feral:CreateWindow(cfg)
 end
 
 return Feral
+
